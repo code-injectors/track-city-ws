@@ -21,6 +21,8 @@ public class ReportDTO extends AbstractDTO {
     private CategoryDTO category;
     private List<MediaDTO> media;
     private List<ReviewDTO> reviews;
+    private Integer upVotes;
+    private Integer downVotes;
 
     public String getStatus() {
         return status;
@@ -92,5 +94,21 @@ public class ReportDTO extends AbstractDTO {
 
     public void setReviews(List<ReviewDTO> reviews) {
         this.reviews = reviews;
+    }
+
+    public Integer getUpVotes() {
+        return upVotes;
+    }
+
+    public void setUpVotes(Integer upVotes) {
+        this.upVotes = upVotes;
+    }
+
+    public Integer getDownVotes() {
+        return downVotes;
+    }
+
+    public void setDownVotes(Integer downVotes) {
+        this.downVotes = downVotes;
     }
 }
