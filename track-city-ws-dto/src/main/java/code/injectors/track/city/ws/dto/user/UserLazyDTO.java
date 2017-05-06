@@ -3,8 +3,6 @@ package code.injectors.track.city.ws.dto.user;
 import code.injectors.track.city.ws.dto.AbstractDTO;
 import code.injectors.track.city.ws.dto.Reference;
 
-import java.util.List;
-
 /**
  * @author Chatzakis Nikolaos
  */
@@ -16,7 +14,6 @@ public class UserLazyDTO extends AbstractDTO {
     private String lastName;
     private Reference municipality;
     private Reference manager;
-    private List<Reference> subordinates;
     private Reference role;
 
     public String getEmail() {
@@ -65,14 +62,6 @@ public class UserLazyDTO extends AbstractDTO {
 
     public void setManager(Reference manager) {
         this.manager = manager;
-    }
-
-    public List<Reference> getSubordinates() {
-        return subordinates;
-    }
-
-    public void setSubordinates(List<Reference> subordinates) {
-        this.subordinates = subordinates;
     }
 
     public Reference getRole() {
