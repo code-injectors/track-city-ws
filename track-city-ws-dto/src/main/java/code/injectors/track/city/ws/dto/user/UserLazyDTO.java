@@ -9,7 +9,6 @@ import code.injectors.track.city.ws.dto.Reference;
 public class UserLazyDTO extends AbstractDTO {
 
     private String email;
-    private String password;
     private String firstName;
     private String lastName;
     private Reference municipality;
@@ -22,14 +21,6 @@ public class UserLazyDTO extends AbstractDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {

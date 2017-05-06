@@ -5,6 +5,7 @@ import code.injectors.track.city.ws.dto.user.UserDTO;
 import code.injectors.track.city.ws.mapper.PageMapper;
 import code.injectors.track.city.ws.mapper.municipality.MunicipalityMapper;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 /**
  * @author Chatzakis Nikolaos
@@ -12,6 +13,6 @@ import org.mapstruct.Mapper;
 @Mapper(uses = {
         RoleMapper.class,
         MunicipalityMapper.class
-})
+}, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserMapper extends PageMapper<User, UserDTO> {
 }
