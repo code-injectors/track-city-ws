@@ -43,7 +43,7 @@ public class MediaControllerImpl implements MediaController {
 
     @Override
     public PageableCrudService<Media> getService() {
-        return null;
+        return mediaService;
     }
 
     @Override
