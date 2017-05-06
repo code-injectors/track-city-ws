@@ -15,3 +15,6 @@ spring:
     show-sql: true
     properties:
       format-sql: true
+
+track-city-ws:
+  file-system-image-path: /srv/trackcity/images
