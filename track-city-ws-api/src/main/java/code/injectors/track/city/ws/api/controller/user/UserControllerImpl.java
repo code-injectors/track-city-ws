@@ -12,6 +12,7 @@ import code.injectors.track.city.ws.service.user.UserService;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +50,7 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<Page<UserDTO>> getAll(Predicate predicate, Pageable pageable) {
+    public ResponseEntity<Page<UserDTO>> getAll(@QuerydslPredicate(root = User.class) Predicate predicate, Pageable pageable) {
         return getAllDefaultImplementation(predicate, pageable);
     }
 }
