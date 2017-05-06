@@ -1,5 +1,6 @@
 package code.injectors.track.city.ws.api.controller.report;
 
+import code.injectors.track.city.ws.commons.constant.EndPoint;
 import code.injectors.track.city.ws.domain.entity.report.Category;
 import code.injectors.track.city.ws.dto.report.CategoryDTO;
 import code.injectors.track.city.ws.mapper.PageMapper;
@@ -11,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Chrisostomos Bakouras
  */
 @RestController
+@RequestMapping(EndPoint.CATEGORIES)
 public class CategoryControllerImpl implements CategoryController {
 
     private final CategoryService categoryService;

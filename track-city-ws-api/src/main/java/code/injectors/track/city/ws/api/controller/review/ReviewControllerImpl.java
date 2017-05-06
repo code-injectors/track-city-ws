@@ -1,5 +1,6 @@
 package code.injectors.track.city.ws.api.controller.review;
 
+import code.injectors.track.city.ws.commons.constant.EndPoint;
 import code.injectors.track.city.ws.domain.entity.review.Review;
 import code.injectors.track.city.ws.dto.review.ReviewDTO;
 import code.injectors.track.city.ws.dto.review.ReviewLazyDTO;
@@ -12,12 +13,14 @@ import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Chatzakis Nikolaos
  */
 @RestController
+@RequestMapping(EndPoint.REVIEWS)
 public class ReviewControllerImpl implements ReviewController {
 
     private final ReviewMapper reviewMapper;
