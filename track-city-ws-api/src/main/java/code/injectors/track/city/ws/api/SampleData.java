@@ -4,14 +4,18 @@ import code.injectors.track.city.ws.domain.entity.municipality.Municipality;
 import code.injectors.track.city.ws.domain.entity.report.Category;
 import code.injectors.track.city.ws.domain.entity.user.Role;
 import code.injectors.track.city.ws.domain.entity.user.User;
-import code.injectors.track.city.ws.domain.repository.system.*;
+import code.injectors.track.city.ws.domain.repository.media.MediaRepository;
+import code.injectors.track.city.ws.domain.repository.municipality.MunicipalityRepository;
+import code.injectors.track.city.ws.domain.repository.report.CategoryRepository;
+import code.injectors.track.city.ws.domain.repository.report.ReportRepository;
+import code.injectors.track.city.ws.domain.repository.review.ReviewRepository;
+import code.injectors.track.city.ws.domain.repository.user.RoleRepository;
+import code.injectors.track.city.ws.domain.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
 
 /**
  * @author Chatzakis Nikolaos

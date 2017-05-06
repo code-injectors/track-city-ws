@@ -1,4 +1,4 @@
-package code.injectors.track.city.ws.domain.repository.system;
+package code.injectors.track.city.ws.domain.repository.media;
 
 import code.injectors.track.city.ws.domain.entity.media.Media;
 import code.injectors.track.city.ws.domain.repository.GenericRepository;

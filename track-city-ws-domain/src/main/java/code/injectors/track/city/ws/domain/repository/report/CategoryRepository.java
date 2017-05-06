@@ -1,4 +1,4 @@
-package code.injectors.track.city.ws.domain.repository.system;
+package code.injectors.track.city.ws.domain.repository.report;
 
 import code.injectors.track.city.ws.domain.entity.report.Category;
 import code.injectors.track.city.ws.domain.repository.GenericRepository;
