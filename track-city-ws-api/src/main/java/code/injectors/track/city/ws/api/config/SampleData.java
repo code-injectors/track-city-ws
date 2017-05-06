@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.IntStream;
 
@@ -132,34 +133,94 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         final User nchatzak = new User();
         nchatzak.setEmail("nchatzak@injectors.com");
         nchatzak.setFirstName("Nikolaos");
-        nchatzak.setLastName("Chantzakis");
+        nchatzak.setLastName("Chatzakis");
         nchatzak.setRole(clientRole);
         nchatzak.setPassword("tralala");
         userRepository.save(nchatzak);
 
-        IntStream.rangeClosed(1, 50)
+        IntStream.rangeClosed(1, 20)
                 .forEach(value -> {
                     final Media media = new Media();
-                    media.setMeta("Bad Road");
-                    media.setName("bad road");
+                    media.setMeta("Blocking car!");
+                    media.setName("Blocking car!");
                     media.setType(MediaType.IMAGE);
                     final Media createdMedia = mediaRepository.save(media);
 
-                    final Review review = new Review();
-                    review.setUpvote(true);
-                    review.setComment("Exei dikaio to palikari.");
-                    review.setUser(nchatzak);
-                    final Review createdReview = reviewRepository.save(review);
+                    final Review review1 = new Review();
+                    review1.setUpvote(true);
+                    review1.setComment("Έχει δίκιο το παλικάρι! Έλεος πια!");
+                    review1.setUser(nchatzak);
+                    final Review createdReview1 = reviewRepository.save(review1);
+
+                    final Review review2 = new Review();
+                    review2.setUpvote(true);
+                    review2.setComment("+1");
+                    review2.setUser(nchatzak);
+                    final Review createdReview2 = reviewRepository.save(review2);
 
                     final Report report = new Report();
-                    report.setMedia(Collections.singletonList(media));
-                    report.setCategory(roadCategory);
+                    report.setMedia(Collections.singletonList(createdMedia));
+                    report.setCategory(blockingCarCategory);
                     report.setCreator(nchatzak);
                     report.setLatitude(41.0849900);
                     report.setLongitude(23.5475700);
                     report.setStatus(ReportStatus.PENDING);
                     report.setDescription("Έχει αποκλειστεί όλη η περιοχή και δεν περνάνε λεωφορεία.");
                     report.setTitle("Ο Φελλός άφησε το αυτοκίνητο του πάνω στην διάβαση πεζών " + value);
+                    report.setReviews(Arrays.asList(createdReview1, createdReview2));
+                    reportRepository.save(report);
+                });
+
+        IntStream.rangeClosed(1, 20)
+                .forEach(value -> {
+                    final Media media = new Media();
+                    media.setMeta("Wow!");
+                    media.setName("...");
+                    media.setType(MediaType.IMAGE);
+                    final Media createdMedia = mediaRepository.save(media);
+
+                    final Review review = new Review();
+                    review.setUpvote(true);
+                    review.setComment("Fix it please.");
+                    review.setUser(nchatzak);
+                    final Review createdReview = reviewRepository.save(review);
+
+                    final Report report = new Report();
+                    report.setMedia(Collections.singletonList(createdMedia));
+                    report.setCategory(emergencyCategory);
+                    report.setCreator(nchatzak);
+                    report.setLatitude(41.0849900);
+                    report.setLongitude(23.5475700);
+                    report.setStatus(ReportStatus.PENDING);
+                    report.setDescription("Whatever description.");
+                    report.setTitle("Whatever title " + value);
+                    report.setReviews(Collections.singletonList(createdReview));
+                    reportRepository.save(report);
+                });
+
+        IntStream.rangeClosed(1, 20)
+                .forEach(value -> {
+                    final Media media = new Media();
+                    media.setMeta("Λακούβες 1");
+                    media.setName("Λακούβες 1");
+                    media.setType(MediaType.IMAGE);
+                    final Media createdMedia = mediaRepository.save(media);
+
+                    final Review review = new Review();
+                    review.setUpvote(true);
+                    review.setComment("Ναι, και γω πού πέρασα πριν ήταν χάλια ο δρόμος. Από τις τελευταίες βροχές έχουν ανοίξει πολλές τρύπες.");
+                    review.setUser(nchatzak);
+                    final Review createdReview = reviewRepository.save(review);
+
+                    final Report report = new Report();
+                    report.setMedia(Collections.singletonList(createdMedia));
+                    report.setCategory(roadCategory);
+                    report.setCreator(nchatzak);
+                    report.setLatitude(41.0849900);
+                    report.setLongitude(23.5475700);
+                    report.setStatus(ReportStatus.NEW);
+                    report.setDescription("Έξω από το σπίτι μου επικρατεί η κατάσταση που φαίνεται στις φωτογραφίες. Παρακαλώ κάντε κάτι, δεν μπορώ να βγω με το αμάξι!");
+                    report.setTitle("Λακούβες παντού " + value);
                     report.setReviews(Collections.singletonList(createdReview));
                     reportRepository.save(report);
                 });
