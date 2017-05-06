@@ -3,8 +3,10 @@ package code.injectors.track.city.ws.domain.entity.user;
 import code.injectors.track.city.ws.domain.entity.BaseEntity;
 import code.injectors.track.city.ws.domain.entity.municipality.Municipality;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * @author Chatzakis Nikolaos

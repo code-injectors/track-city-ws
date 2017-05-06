@@ -1,0 +1,44 @@
+package code.injectors.track.city.ws.mapper;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+/**
+ * @author Chatzakis Nikolaos
+ */
+public interface PageMapper<E, D> extends GenericMapper<E, D> {
+
+    default Page<D> toDTO(final Page<E> page) {
+        Objects.requireNonNull(page, "page is null");
+
+        final List<D> objects = page.getContent().stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(
+                new ArrayList<>(objects),
+                new PageRequest(page.getNumber(), page.getSize()),
+                page.getTotalElements()
+        );
+    }
+
+    default Page<E> fromDTO(final Page<D> page) {
+        Objects.requireNonNull(page, "page is null");
+
+        final List<E> objects = page.getContent().stream()
+                .map(this::fromDTO)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(
+                new ArrayList<>(objects),
+                new PageRequest(page.getNumber(), page.getSize()),
+                page.getTotalElements()
+        );
+    }
+}
