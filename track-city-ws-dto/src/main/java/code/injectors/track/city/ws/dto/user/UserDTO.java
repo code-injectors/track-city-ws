@@ -3,8 +3,6 @@ package code.injectors.track.city.ws.dto.user;
 import code.injectors.track.city.ws.dto.AbstractDTO;
 import code.injectors.track.city.ws.dto.municipality.MunicipalityDTO;
 
-import java.util.List;
-
 /**
  * @author Chatzakis Nikolaos
  */
@@ -16,7 +14,6 @@ public class UserDTO extends AbstractDTO {
     private String lastName;
     private MunicipalityDTO municipality;
     private UserDTO manager;
-    private List<UserDTO> subordinates;
     private RoleDTO role;
 
     public String getEmail() {
@@ -65,14 +62,6 @@ public class UserDTO extends AbstractDTO {
 
     public void setManager(UserDTO manager) {
         this.manager = manager;
-    }
-
-    public List<UserDTO> getSubordinates() {
-        return subordinates;
-    }
-
-    public void setSubordinates(List<UserDTO> subordinates) {
-        this.subordinates = subordinates;
     }
 
     public RoleDTO getRole() {
