@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/trackcity
+    username: postgres
+    password:
+    driverClassName: org.postgresql.Driver
+    sql-script-encoding: UTF-8
+    initialize: true
+
+  jpa:
+    database: postgresql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      format-sql: true
