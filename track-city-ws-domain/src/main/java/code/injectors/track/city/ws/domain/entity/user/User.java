@@ -28,9 +28,6 @@ public class User extends BaseEntity {
     @JoinColumn(name = "manager_id")
     private User manager;
 
-    @OneToMany(mappedBy = "manager")
-    private List<User> subordinates;
-
     @ManyToOne
     private Role role;
 
@@ -80,14 +77,6 @@ public class User extends BaseEntity {
 
     public void setManager(User manager) {
         this.manager = manager;
-    }
-
-    public List<User> getSubordinates() {
-        return subordinates;
-    }
-
-    public void setSubordinates(List<User> subordinates) {
-        this.subordinates = subordinates;
     }
 
     public Role getRole() {

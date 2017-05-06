@@ -117,5 +117,8 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         chbakouras.setRole(clientRole);
         chbakouras.setPassword("tralala");
         userRepository.save(chbakouras);
+
+
+        final User one = userRepository.findOne(createdSuperUser.getId());
     }
 }
