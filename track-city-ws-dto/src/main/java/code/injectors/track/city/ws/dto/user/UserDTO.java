@@ -11,6 +11,7 @@ public class UserDTO extends AbstractDTO {
     private String email;
     private String firstName;
     private String lastName;
+    private String emailHash;
     private MunicipalityDTO municipality;
     private UserDTO manager;
     private RoleDTO role;
@@ -37,6 +38,14 @@ public class UserDTO extends AbstractDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmailHash() {
+        return emailHash;
+    }
+
+    public void setEmailHash(String emailHash) {
+        this.emailHash = emailHash;
     }
 
     public MunicipalityDTO getMunicipality() {
