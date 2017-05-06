@@ -36,4 +36,8 @@ public interface CrudService<E extends BaseEntity> {
     default Try<Void> delete(String id) {
         return Try.run(() -> getRepository().delete(id));
     }
+
+    default Try<Boolean> exists(String id) {
+        return Try.of(() -> getRepository().exists(id));
+    }
 }

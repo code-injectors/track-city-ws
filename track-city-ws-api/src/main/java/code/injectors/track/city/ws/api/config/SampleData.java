@@ -1,4 +1,4 @@
-package code.injectors.track.city.ws.api;
+package code.injectors.track.city.ws.api.config;
 
 import code.injectors.track.city.ws.domain.entity.municipality.Municipality;
 import code.injectors.track.city.ws.domain.entity.report.Category;
