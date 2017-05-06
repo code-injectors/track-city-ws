@@ -25,10 +25,10 @@
             <groupId>code.injectors.track.city</groupId>
             <artifactId>track-city-ws-domain</artifactId>
         </dependency>
-        <dependency>
-            <groupId>code.injectors.track.city</groupId>
-            <artifactId>track-city-ws-security</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>code.injectors.track.city</groupId>-->
+            <!--<artifactId>track-city-ws-security</artifactId>-->
+        <!--</dependency>-->
 
         <!-- Basic Spring Boot Dependencies -->
         <dependency>
