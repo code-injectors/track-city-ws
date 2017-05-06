@@ -1,7 +1,12 @@
 package code.injectors.track.city.ws.api.config;
 
+import code.injectors.track.city.ws.domain.entity.media.Media;
+import code.injectors.track.city.ws.domain.entity.media.MediaType;
 import code.injectors.track.city.ws.domain.entity.municipality.Municipality;
 import code.injectors.track.city.ws.domain.entity.report.Category;
+import code.injectors.track.city.ws.domain.entity.report.Report;
+import code.injectors.track.city.ws.domain.entity.report.ReportStatus;
+import code.injectors.track.city.ws.domain.entity.review.Review;
 import code.injectors.track.city.ws.domain.entity.user.Role;
 import code.injectors.track.city.ws.domain.entity.user.User;
 import code.injectors.track.city.ws.domain.repository.media.MediaRepository;
@@ -16,6 +21,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
 
 /**
  * @author Chatzakis Nikolaos
@@ -121,8 +128,36 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         chbakouras.setRole(clientRole);
         chbakouras.setPassword("tralala");
         userRepository.save(chbakouras);
+        final User nchatzak = new User();
+        nchatzak.setEmail("nchatzak@injectors.com");
+        nchatzak.setFirstName("Nikolaos");
+        nchatzak.setLastName("Chantzakis");
+        nchatzak.setRole(clientRole);
+        nchatzak.setPassword("tralala");
+        userRepository.save(nchatzak);
 
+        final Media media = new Media();
+        media.setMeta("Bad Road");
+        media.setName("bad road");
+        media.setType(MediaType.IMAGE);
+        final Media createdMedia = mediaRepository.save(media);
 
-        final User one = userRepository.findOne(createdSuperUser.getId());
+        final Review review = new Review();
+        review.setUpvote(true);
+        review.setComment("Exei dikaio to palikari.");
+        review.setUser(nchatzak);
+        final Review createdReview = reviewRepository.save(review);
+
+        final Report report = new Report();
+        report.setMedia(Collections.singletonList(media));
+        report.setCategory(roadCategory);
+        report.setCreator(nchatzak);
+        report.setLatitude(41.0849900);
+        report.setLongitude(23.5475700);
+        report.setStatus(ReportStatus.PENDING);
+        report.setDescription("Έχει αποκλειστεί όλη η περιοχή και δεν περνάνε λεωφορεία.");
+        report.setTitle("Ο Φελλός άφησε το αυτοκίνητο του πάνω στην διάβαση πεζών");
+        report.setReviews(Collections.singletonList(createdReview));
+        reportRepository.save(report);
     }
 }
