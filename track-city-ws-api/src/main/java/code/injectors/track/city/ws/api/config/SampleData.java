@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -40,9 +41,10 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SampleData(CategoryRepository categoryRepository, MediaRepository mediaRepository, MunicipalityRepository municipalityRepository, ReportRepository reportRepository, ReviewRepository reviewRepository, UserRepository userRepository, RoleRepository roleRepository) {
+    public SampleData(CategoryRepository categoryRepository, MediaRepository mediaRepository, MunicipalityRepository municipalityRepository, ReportRepository reportRepository, ReviewRepository reviewRepository, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.categoryRepository = categoryRepository;
         this.mediaRepository = mediaRepository;
         this.municipalityRepository = municipalityRepository;
@@ -50,10 +52,13 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         this.reviewRepository = reviewRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        final String tralala = passwordEncoder.encode("tralala");
+
         // Categories
         final Category roadCategory = new Category();
         roadCategory.setName("Road");
@@ -93,7 +98,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         superUser.setFirstName("Super");
         superUser.setLastName("Admin");
         superUser.setRole(superUserRole);
-        superUser.setPassword("tralala");
+        superUser.setPassword(tralala);
         final User createdSuperUser = userRepository.save(superUser);
 
         final User municipalityAdmin = new User();
@@ -101,7 +106,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         municipalityAdmin.setFirstName("Serres");
         municipalityAdmin.setLastName("Municipality");
         municipalityAdmin.setRole(municipalityAdminRole);
-        municipalityAdmin.setPassword("tralala");
+        municipalityAdmin.setPassword(tralala);
         municipalityAdmin.setManager(createdSuperUser);
         final User createdMunicipalityAdmin = userRepository.save(municipalityAdmin);
 
@@ -110,7 +115,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         employee1.setFirstName("Serres");
         employee1.setLastName("Municipality");
         employee1.setRole(employeeRole);
-        employee1.setPassword("tralala");
+        employee1.setPassword(tralala);
         employee1.setManager(createdMunicipalityAdmin);
         final User createdEmployee1 = userRepository.save(employee1);
 
@@ -119,7 +124,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         employee2.setFirstName("Serres");
         employee2.setLastName("Municipality");
         employee2.setRole(employeeRole);
-        employee2.setPassword("tralala");
+        employee2.setPassword(tralala);
         employee2.setManager(createdMunicipalityAdmin);
         final User createdEmployee2 = userRepository.save(employee2);
 
@@ -128,14 +133,14 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         chbakouras.setFirstName("Chrisostomos");
         chbakouras.setLastName("Bakouras");
         chbakouras.setRole(clientRole);
-        chbakouras.setPassword("tralala");
+        chbakouras.setPassword(tralala);
         userRepository.save(chbakouras);
         final User nchatzak = new User();
         nchatzak.setEmail("nchatzak@injectors.com");
         nchatzak.setFirstName("Nikolaos");
         nchatzak.setLastName("Chatzakis");
         nchatzak.setRole(clientRole);
-        nchatzak.setPassword("tralala");
+        nchatzak.setPassword(tralala);
         userRepository.save(nchatzak);
 
         IntStream.rangeClosed(1, 20)

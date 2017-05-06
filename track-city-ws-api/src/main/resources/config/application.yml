@@ -18,3 +18,12 @@ spring:
 
 track-city-ws:
   file-system-image-path: /srv/trackcity/images
+
+jwt:
+  header: authorization
+  secret: fjbsgjbdsojgn
+  expiration: 1604800
+  route:
+    authentication:
+      path: auth
+      refresh: refresh

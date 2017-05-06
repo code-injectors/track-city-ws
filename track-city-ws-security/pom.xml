@@ -24,6 +24,12 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <!--Javaslang-->
+        <dependency>
+            <groupId>io.javaslang</groupId>
+            <artifactId>javaslang</artifactId>
+        </dependency>
+
         <!-- Testing Dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -36,6 +42,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-
 </project>

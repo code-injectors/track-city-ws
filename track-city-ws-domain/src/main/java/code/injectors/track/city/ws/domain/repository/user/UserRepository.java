@@ -18,4 +18,6 @@ public interface UserRepository extends GenericRepository<User>, QuerydslBinderC
         bindings.bind(root.role.id)
                 .first((stringPath, s) -> stringPath.in(s.split(",")));
     }
+
+    User findByEmail(String username);
 }
