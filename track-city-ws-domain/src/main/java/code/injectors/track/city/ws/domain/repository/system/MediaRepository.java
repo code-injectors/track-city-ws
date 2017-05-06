@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * @author Chrisostomos Bakouras
  */
 @Repository
-public interface MediaGenericRepository extends GenericRepository<Media> {
+public interface MediaRepository extends GenericRepository<Media> {
 }

@@ -24,7 +24,7 @@ public class User extends BaseEntity {
     @ManyToOne
     private Municipality municipality;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "manager_id")
     private User manager;
 
