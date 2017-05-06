@@ -18,5 +18,8 @@ public interface ReportRepository extends GenericRepository<Report>, QuerydslBin
     default void customize(QuerydslBindings bindings, QReport root) {
         bindings.bind(root.title)
                 .first(StringExpression::containsIgnoreCase);
+
+        bindings.bind(root.category.id)
+                .first((stringPath, s) -> stringPath.in(s.split(",")));
     }
 }
