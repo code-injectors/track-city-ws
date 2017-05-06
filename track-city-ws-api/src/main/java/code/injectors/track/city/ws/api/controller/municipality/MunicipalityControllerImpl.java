@@ -11,6 +11,7 @@ import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,7 +48,7 @@ public class MunicipalityControllerImpl implements MunicipalityController {
     }
 
     @Override
-    public ResponseEntity<Page<MunicipalityDTO>> getAll(Predicate predicate, Pageable pageable) {
+    public ResponseEntity<Page<MunicipalityDTO>> getAll(@QuerydslPredicate(root = Municipality.class) Predicate predicate, Pageable pageable) {
         return getAllDefaultImplementation(predicate, pageable);
     }
 }
