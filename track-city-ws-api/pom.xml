@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>track-city-ws</artifactId>
+        <groupId>code.injectors.track.city</groupId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>track-city-ws-api</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <javaslang.version>2.0.6</javaslang.version>
+    </properties>
+
+    <dependencies>
+        <!-- Module Dependencies -->
+        <dependency>
+            <groupId>code.injectors.track.city</groupId>
+            <artifactId>track-city-ws-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>code.injectors.track.city</groupId>
+            <artifactId>track-city-ws-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>code.injectors.track.city</groupId>
+            <artifactId>track-city-ws-dto</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>code.injectors.track.city</groupId>
+            <artifactId>track-city-ws-mapper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>code.injectors.track.city</groupId>
+            <artifactId>track-city-ws-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>code.injectors.track.city</groupId>
+            <artifactId>track-city-ws-service</artifactId>
+        </dependency>
+
+        <!-- Web Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!--Javaslang-->
+        <dependency>
+            <groupId>io.javaslang</groupId>
+            <artifactId>javaslang</artifactId>
+            <version>${javaslang.version}</version>
+        </dependency>
+
+        <!-- Database Dependencies -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Testing Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Development Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
+        <!--Configuration Dependencies-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>track-city-api</finalName>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
