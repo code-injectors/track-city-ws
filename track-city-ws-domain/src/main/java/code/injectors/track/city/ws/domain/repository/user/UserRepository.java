@@ -17,6 +17,12 @@ public interface UserRepository extends GenericRepository<User>, QuerydslBinderC
     default void customize(QuerydslBindings bindings, QUser root) {
         bindings.bind(root.role.id)
                 .first((stringPath, s) -> stringPath.in(s.split(",")));
+
+        bindings.bind(root.firstName)
+                .first((stringPath, s) -> stringPath.containsIgnoreCase(s).or(root.lastName.containsIgnoreCase(s)));
+
+        bindings.bind(root.lastName)
+                .first((stringPath, s) -> stringPath.containsIgnoreCase(s).or(root.firstName.containsIgnoreCase(s)));
     }
 
     User findByEmail(String username);
