@@ -10,6 +10,7 @@ import code.injectors.track.city.ws.service.user.RoleService;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,7 +46,7 @@ public class RoleControllerImpl implements RoleController {
     }
 
     @Override
-    public ResponseEntity<Page<RoleDTO>> getAll(Predicate predicate, Pageable pageable) {
+    public ResponseEntity<Page<RoleDTO>> getAll(@QuerydslPredicate(root = Role.class) Predicate predicate, Pageable pageable) {
         return getAllDefaultImplementation(predicate, pageable);
     }
 }

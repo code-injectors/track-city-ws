@@ -12,6 +12,7 @@ import code.injectors.track.city.ws.service.review.ReviewService;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +50,7 @@ public class ReviewControllerImpl implements ReviewController {
     }
 
     @Override
-    public ResponseEntity<Page<ReviewDTO>> getAll(Predicate predicate, Pageable pageable) {
+    public ResponseEntity<Page<ReviewDTO>> getAll(@QuerydslPredicate(root = Review.class) Predicate predicate, Pageable pageable) {
         return getAllDefaultImplementation(predicate, pageable);
     }
 }
