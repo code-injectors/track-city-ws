@@ -60,6 +60,27 @@ public class MediaControllerImpl implements MediaController {
         return getAllDefaultImplementation(predicate, pageable);
     }
 
+    @Override
+    public ResponseEntity<Void> delete(String id) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .build();
+    }
+
+    @Override
+    public ResponseEntity<MediaDTO> put(String id, MediaDTO dto) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .build();
+    }
+
+    @Override
+    public ResponseEntity<MediaDTO> post(MediaDTO dto) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .build();
+    }
+
     @PostMapping("/{mediaId}/upload")
     public ResponseEntity upload(@PathVariable("mediaId") final String mediaId,
                                  @RequestParam(value = "multipart", required = false) final MultipartFile multipartFile,
