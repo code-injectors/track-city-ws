@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Chrisostomos Bakouras
  */
 @RestController
-@RequestMapping(EndPoint.MUNICIPAlITIES)
+@RequestMapping(EndPoint.MUNICIPALITIES)
 public class MunicipalityControllerImpl implements MunicipalityController {
 
     private final MunicipalityService municipalityService;

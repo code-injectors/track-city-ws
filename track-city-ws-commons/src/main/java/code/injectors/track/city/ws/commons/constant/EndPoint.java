@@ -7,7 +7,7 @@ public final class EndPoint {
 
     public final static String REPORTS = "/reports";
     public final static String MEDIA = "/media";
-    public final static String MUNICIPAlITIES = "/municipalities";
+    public final static String MUNICIPALITIES = "/municipalities";
     public final static String CATEGORIES = "/categories";
     public final static String REVIEWS = "/reviews";
     public final static String USERS = "/users";

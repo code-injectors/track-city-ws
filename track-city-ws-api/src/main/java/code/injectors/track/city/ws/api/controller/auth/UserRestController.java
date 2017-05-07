@@ -30,7 +30,7 @@ public class UserRestController {
         this.userDetailsService = userDetailsService;
     }
 
-    @RequestMapping(value = "user", method = RequestMethod.GET)
+    @RequestMapping(value = "/me", method = RequestMethod.GET)
     public JwtCurrentUser getAuthenticatedUser(HttpServletRequest request) {
         final String token = request.getHeader(tokenHeader);
         final String username = jwtTokenUtil.getUsernameFromToken(token);
