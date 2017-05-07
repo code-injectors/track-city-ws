@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * @author Chrisostomos Bakouras
@@ -31,14 +32,18 @@ public class AuthenticationRestController {
     @Value("${jwt.header}")
     private String tokenHeader;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+
+    private final JwtTokenUtil jwtTokenUtil;
+
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
+    public AuthenticationRestController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserDetailsService userDetailsService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.userDetailsService = userDetailsService;
+    }
 
     @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequestDTO authenticationRequest, Device device) throws AuthenticationException {
@@ -55,9 +60,10 @@ public class AuthenticationRestController {
         // Reload password post-security so we can generate token
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails, device);
+        final Date expirationDateFromToken = jwtTokenUtil.getExpirationDateFromToken(token);
 
         // Return the token
-        return ResponseEntity.ok(new JwtAuthenticationResponseDTO(token));
+        return ResponseEntity.ok(new JwtAuthenticationResponseDTO(token, expirationDateFromToken));
     }
 
     @RequestMapping(value = "${jwt.route.authentication.refresh}", method = RequestMethod.GET)
@@ -67,8 +73,10 @@ public class AuthenticationRestController {
         JwtCurrentUser user = (JwtCurrentUser) userDetailsService.loadUserByUsername(username);
 
         if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
-            String refreshedToken = jwtTokenUtil.refreshToken(token);
-            return ResponseEntity.ok(new JwtAuthenticationResponseDTO(refreshedToken));
+            final String refreshedToken = jwtTokenUtil.refreshToken(token);
+            final Date expirationDateFromToken = jwtTokenUtil.getExpirationDateFromToken(token);
+
+            return ResponseEntity.ok(new JwtAuthenticationResponseDTO(refreshedToken, expirationDateFromToken));
         } else {
             return ResponseEntity.badRequest().body(null);
         }
