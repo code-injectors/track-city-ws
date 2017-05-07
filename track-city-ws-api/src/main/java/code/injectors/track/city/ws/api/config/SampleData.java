@@ -72,12 +72,18 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
 
         final Municipality serresMunicipality = new Municipality();
         serresMunicipality.setName("Serres");
+        serresMunicipality.setLatitude(41.0849900);
+        serresMunicipality.setLongitude(23.5475700);
         municipalityRepository.save(serresMunicipality);
         final Municipality thessalonikiMunicipality = new Municipality();
         thessalonikiMunicipality.setName("Thessaloniki");
+        thessalonikiMunicipality.setLatitude(41.0849900);
+        thessalonikiMunicipality.setLongitude(23.5475700);
         municipalityRepository.save(thessalonikiMunicipality);
         final Municipality athensMunicipality = new Municipality();
         athensMunicipality.setName("Athens");
+        athensMunicipality.setLatitude(41.0849900);
+        athensMunicipality.setLongitude(23.5475700);
         municipalityRepository.save(athensMunicipality);
 
         final Role superUserRole = new Role();
