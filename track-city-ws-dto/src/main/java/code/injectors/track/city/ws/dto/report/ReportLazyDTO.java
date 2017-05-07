@@ -3,6 +3,7 @@ package code.injectors.track.city.ws.dto.report;
 import code.injectors.track.city.ws.dto.AbstractDTO;
 import code.injectors.track.city.ws.dto.Reference;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class ReportLazyDTO extends AbstractDTO {
     private Reference category;
     private List<Reference> media;
     private List<Reference> reviews;
+    private Date createdAt;
 
     public String getStatus() {
         return status;
@@ -90,5 +92,13 @@ public class ReportLazyDTO extends AbstractDTO {
 
     public void setReviews(List<Reference> reviews) {
         this.reviews = reviews;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

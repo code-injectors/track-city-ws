@@ -5,6 +5,7 @@ import code.injectors.track.city.ws.dto.media.MediaDTO;
 import code.injectors.track.city.ws.dto.review.ReviewDTO;
 import code.injectors.track.city.ws.dto.user.UserDTO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class ReportDTO extends AbstractDTO {
     private Integer downVotes;
     private Integer visibleComments;
     private Integer allComments;
+    private Date createdAt;
 
     public String getStatus() {
         return status;
@@ -128,5 +130,13 @@ public class ReportDTO extends AbstractDTO {
 
     public void setAllComments(Integer allComments) {
         this.allComments = allComments;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

@@ -6,6 +6,7 @@ import code.injectors.track.city.ws.domain.entity.review.Review;
 import code.injectors.track.city.ws.domain.entity.user.User;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +37,8 @@ public class Report extends BaseEntity {
 
     @OneToMany
     private List<Review> reviews;
+
+    private Date createdAt;
 
     public ReportStatus getStatus() {
         return status;
@@ -107,5 +110,13 @@ public class Report extends BaseEntity {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

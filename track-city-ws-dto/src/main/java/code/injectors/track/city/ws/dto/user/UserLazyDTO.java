@@ -3,6 +3,8 @@ package code.injectors.track.city.ws.dto.user;
 import code.injectors.track.city.ws.dto.AbstractDTO;
 import code.injectors.track.city.ws.dto.Reference;
 
+import java.util.Date;
+
 /**
  * @author Chatzakis Nikolaos
  */
@@ -15,6 +17,7 @@ public class UserLazyDTO extends AbstractDTO {
     private Reference municipality;
     private Reference manager;
     private Reference role;
+    private Date createdAt;
 
     public String getEmail() {
         return email;
@@ -70,5 +73,13 @@ public class UserLazyDTO extends AbstractDTO {
 
     public void setRole(Reference role) {
         this.role = role;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

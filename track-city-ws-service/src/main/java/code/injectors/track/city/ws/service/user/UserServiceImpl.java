@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * @author Chrisostomos Bakouras
  */
@@ -32,6 +34,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Try<User> save(User entity) {
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+
+        return Try.of(() -> userRepository.save(entity));
+    }
+
+    @Override
+    public Try<User> create(User entity) {
+        entity.setCreatedAt(new Date());
 
         return Try.of(() -> userRepository.save(entity));
     }

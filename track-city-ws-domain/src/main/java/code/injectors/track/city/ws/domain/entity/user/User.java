@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * @author Chatzakis Nikolaos
@@ -32,6 +33,8 @@ public class User extends BaseEntity {
 
     @ManyToOne
     private Role role;
+
+    private Date createdAt;
 
     public String getEmail() {
         return email;
@@ -87,5 +90,13 @@ public class User extends BaseEntity {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
