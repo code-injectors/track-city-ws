@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,7 +43,7 @@ public class RegisterControllerImpl implements RegisterController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO> register(UserLazyDTO dto) {
+    public ResponseEntity<UserDTO> register(@RequestBody UserLazyDTO dto) {
         return Try
                 .of(() -> {
                     final User user = userLazyMapper.fromDTO(dto);

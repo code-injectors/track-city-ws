@@ -106,7 +106,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         superUser.setRole(superUserRole);
         superUser.setPassword(tralala);
         final User createdSuperUser = userService.create(superUser)
-                .getOrElseThrow(throwable -> new RuntimeException());
+                .getOrElseThrow(throwable -> new RuntimeException(throwable));
 
         final User municipalityAdmin = new User();
         municipalityAdmin.setEmail("municipality.admin@injectors.com");
@@ -116,7 +116,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         municipalityAdmin.setPassword(tralala);
         municipalityAdmin.setManager(createdSuperUser);
         final User createdMunicipalityAdmin = userService.create(municipalityAdmin)
-                .getOrElseThrow(throwable -> new RuntimeException());
+                .getOrElseThrow(throwable -> new RuntimeException(throwable));
 
         final User employee1 = new User();
         employee1.setEmail("employee1@injectors.com");
@@ -126,17 +126,17 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         employee1.setPassword(tralala);
         employee1.setManager(createdMunicipalityAdmin);
         final User createdEmployee1 = userService.create(employee1)
-                .getOrElseThrow(throwable -> new RuntimeException());
+                .getOrElseThrow(throwable -> new RuntimeException(throwable));
 
         final User employee2 = new User();
-        employee2.setEmail("employee1@injectors.com");
+        employee2.setEmail("employee2@injectors.com");
         employee2.setFirstName("Serres");
         employee2.setLastName("Municipality");
         employee2.setRole(employeeRole);
         employee2.setPassword(tralala);
         employee2.setManager(createdMunicipalityAdmin);
         final User createdEmployee2 = userService.create(employee2)
-                .getOrElseThrow(throwable -> new RuntimeException());
+                .getOrElseThrow(throwable -> new RuntimeException(throwable));
 
         final User chbakouras = new User();
         chbakouras.setEmail("chbakouras@injectors.com");
