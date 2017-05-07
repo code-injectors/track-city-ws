@@ -62,7 +62,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <userId>process</userId>
+                        <id>process</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>process</goal>
