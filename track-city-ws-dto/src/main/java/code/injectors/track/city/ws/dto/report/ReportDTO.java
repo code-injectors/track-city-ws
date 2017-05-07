@@ -23,6 +23,8 @@ public class ReportDTO extends AbstractDTO {
     private List<ReviewDTO> reviews;
     private Integer upVotes;
     private Integer downVotes;
+    private Integer visibleComments;
+    private Integer allComments;
 
     public String getStatus() {
         return status;
@@ -110,5 +112,21 @@ public class ReportDTO extends AbstractDTO {
 
     public void setDownVotes(Integer downVotes) {
         this.downVotes = downVotes;
+    }
+
+    public Integer getVisibleComments() {
+        return visibleComments;
+    }
+
+    public void setVisibleComments(Integer visibleComments) {
+        this.visibleComments = visibleComments;
+    }
+
+    public Integer getAllComments() {
+        return allComments;
+    }
+
+    public void setAllComments(Integer allComments) {
+        this.allComments = allComments;
     }
 }
