@@ -13,7 +13,7 @@ public class UserLazyDTO extends AbstractDTO {
     private String email;
     private String firstName;
     private String lastName;
-    private String emailHash;
+    private String password;
     private Reference municipality;
     private Reference manager;
     private Reference role;
@@ -43,12 +43,12 @@ public class UserLazyDTO extends AbstractDTO {
         this.lastName = lastName;
     }
 
-    public String getEmailHash() {
-        return emailHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEmailHash(String emailHash) {
-        this.emailHash = emailHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Reference getMunicipality() {
