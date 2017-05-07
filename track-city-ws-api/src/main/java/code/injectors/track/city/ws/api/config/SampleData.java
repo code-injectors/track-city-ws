@@ -70,6 +70,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         emergencyCategory.setName("Emergency");
         categoryRepository.save(emergencyCategory);
 
+        // Municipalities
         final Municipality serresMunicipality = new Municipality();
         serresMunicipality.setName("Serres");
         serresMunicipality.setLatitude(41.0849900);
@@ -86,6 +87,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         athensMunicipality.setLongitude(23.5475700);
         municipalityRepository.save(athensMunicipality);
 
+        // Roles
         final Role superUserRole = new Role();
         superUserRole.setName("SUPER_USER");
         superUserRole.setTitle("Super User");
@@ -103,8 +105,9 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         clientRole.setTitle("Client");
         roleRepository.save(clientRole);
 
+        // Users
         final User superUser = new User();
-        superUser.setEmail("admin@injectors.com");
+        superUser.setEmail("superuser@example.com");
         superUser.setFirstName("Super");
         superUser.setLastName("Admin");
         superUser.setRole(superUserRole);
@@ -113,7 +116,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
                 .getOrElseThrow(throwable -> new RuntimeException(throwable));
 
         final User municipalityAdmin = new User();
-        municipalityAdmin.setEmail("municipality.admin@injectors.com");
+        municipalityAdmin.setEmail("municipality@example.com");
         municipalityAdmin.setFirstName("Serres");
         municipalityAdmin.setLastName("Municipality");
         municipalityAdmin.setRole(municipalityAdminRole);
@@ -123,9 +126,9 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
                 .getOrElseThrow(throwable -> new RuntimeException(throwable));
 
         final User employee1 = new User();
-        employee1.setEmail("employee1@injectors.com");
-        employee1.setFirstName("Serres");
-        employee1.setLastName("Municipality");
+        employee1.setEmail("employee1@example.com");
+        employee1.setFirstName("John");
+        employee1.setLastName("Doe");
         employee1.setRole(employeeRole);
         employee1.setPassword(tralala);
         employee1.setManager(createdMunicipalityAdmin);
@@ -133,9 +136,9 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
                 .getOrElseThrow(throwable -> new RuntimeException(throwable));
 
         final User employee2 = new User();
-        employee2.setEmail("employee2@injectors.com");
-        employee2.setFirstName("Serres");
-        employee2.setLastName("Municipality");
+        employee2.setEmail("employee2@example.com");
+        employee2.setFirstName("Foo");
+        employee2.setLastName("Bar");
         employee2.setRole(employeeRole);
         employee2.setPassword(tralala);
         employee2.setManager(createdMunicipalityAdmin);
@@ -157,6 +160,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         nchatzak.setPassword(tralala);
         userService.create(nchatzak);
 
+        // Actual data
         IntStream.rangeClosed(1, 20)
                 .forEach(value -> {
                     final Media media = new Media();
