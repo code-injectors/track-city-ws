@@ -1,6 +1,8 @@
 package code.injectors.track.city.ws.api.controller.auth;
 
 import code.injectors.track.city.ws.api.config.util.JwtTokenUtil;
+import code.injectors.track.city.ws.domain.entity.user.User;
+import code.injectors.track.city.ws.mapper.user.UserMapper;
 import code.injectors.track.city.ws.security.domain.JwtCurrentUser;
 import code.injectors.track.city.ws.dto.auth.JwtAuthenticationRequestDTO;
 import code.injectors.track.city.ws.dto.auth.JwtAuthenticationResponseDTO;
@@ -38,11 +40,14 @@ public class AuthenticationRestController {
 
     private final UserDetailsService userDetailsService;
 
+    private final UserMapper userMapper;
+
     @Autowired
-    public AuthenticationRestController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserDetailsService userDetailsService) {
+    public AuthenticationRestController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserDetailsService userDetailsService, UserMapper userMapper) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userDetailsService = userDetailsService;
+        this.userMapper = userMapper;
     }
 
     @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
@@ -63,20 +68,21 @@ public class AuthenticationRestController {
         final Date expirationDateFromToken = jwtTokenUtil.getExpirationDateFromToken(token);
 
         // Return the token
-        return ResponseEntity.ok(new JwtAuthenticationResponseDTO(token, expirationDateFromToken));
+        return ResponseEntity.ok(new JwtAuthenticationResponseDTO(token, expirationDateFromToken, userMapper.toDTO((User) userDetails)));
     }
 
     @RequestMapping(value = "${jwt.route.authentication.refresh}", method = RequestMethod.GET)
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         String username = jwtTokenUtil.getUsernameFromToken(token);
-        JwtCurrentUser user = (JwtCurrentUser) userDetailsService.loadUserByUsername(username);
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        final JwtCurrentUser user = (JwtCurrentUser) userDetails;
 
         if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
             final String refreshedToken = jwtTokenUtil.refreshToken(token);
             final Date expirationDateFromToken = jwtTokenUtil.getExpirationDateFromToken(token);
 
-            return ResponseEntity.ok(new JwtAuthenticationResponseDTO(refreshedToken, expirationDateFromToken));
+            return ResponseEntity.ok(new JwtAuthenticationResponseDTO(refreshedToken, expirationDateFromToken, userMapper.toDTO((User) userDetails)));
         } else {
             return ResponseEntity.badRequest().body(null);
         }
