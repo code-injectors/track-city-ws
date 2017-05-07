@@ -1,6 +1,7 @@
 package code.injectors.track.city.ws.dto.review;
 
 import code.injectors.track.city.ws.dto.AbstractDTO;
+import code.injectors.track.city.ws.dto.Reference;
 import code.injectors.track.city.ws.dto.user.UserDTO;
 
 /**
@@ -12,6 +13,7 @@ public class ReviewDTO extends AbstractDTO {
     private String comment;
     private Boolean hidden;
     private UserDTO user;
+    private Reference report;
 
     public Boolean getUpvote() {
         return isUpvote;
@@ -43,5 +45,13 @@ public class ReviewDTO extends AbstractDTO {
 
     public void setUser(UserDTO user) {
         this.user = user;
+    }
+
+    public Reference getReport() {
+        return report;
+    }
+
+    public void setReport(Reference report) {
+        this.report = report;
     }
 }

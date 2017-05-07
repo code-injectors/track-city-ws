@@ -12,6 +12,7 @@ public class ReviewLazyDTO extends AbstractDTO {
     private String comment;
     private Boolean hidden;
     private Reference user;
+    private Reference report;
 
     public Boolean getUpvote() {
         return isUpvote;
@@ -43,5 +44,13 @@ public class ReviewLazyDTO extends AbstractDTO {
 
     public void setUser(Reference user) {
         this.user = user;
+    }
+
+    public Reference getReport() {
+        return report;
+    }
+
+    public void setReport(Reference report) {
+        this.report = report;
     }
 }
