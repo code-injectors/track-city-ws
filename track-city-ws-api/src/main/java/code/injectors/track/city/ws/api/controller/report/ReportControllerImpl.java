@@ -2,7 +2,6 @@ package code.injectors.track.city.ws.api.controller.report;
 
 import code.injectors.track.city.ws.commons.constant.EndPoint;
 import code.injectors.track.city.ws.domain.entity.report.Report;
-import code.injectors.track.city.ws.domain.entity.report.ReportStatus;
 import code.injectors.track.city.ws.dto.report.ReportDTO;
 import code.injectors.track.city.ws.dto.report.ReportLazyDTO;
 import code.injectors.track.city.ws.mapper.PageMapper;
@@ -61,14 +60,10 @@ public class ReportControllerImpl implements ReportController {
 
     @Override
     @PostMapping("/{id}/change-status/{status}")
-    public ResponseEntity<Void> changeStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
-        reportService.findOne(id)
-                .forEach(reports -> reports
-                        .forEach(report -> {
-                            report.setStatus(ReportStatus.valueOf(status));
-                            reportService.update(report);
-                        }));
+    public ResponseEntity<ReportLazyDTO> changeStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
+        final Report updatedReport = reportService.changeStatus(id, status);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok()
+                .body(reportLazyMapper.toDTO(updatedReport));
     }
 }

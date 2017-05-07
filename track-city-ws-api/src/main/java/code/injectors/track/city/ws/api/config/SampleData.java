@@ -88,15 +88,19 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
 
         final Role superUserRole = new Role();
         superUserRole.setName("SUPER_USER");
+        superUserRole.setTitle("Super User");
         roleRepository.save(superUserRole);
         final Role municipalityAdminRole = new Role();
         municipalityAdminRole.setName("MUNICIPALITY_ADMIN");
+        municipalityAdminRole.setTitle("Municipality Admin");
         roleRepository.save(municipalityAdminRole);
         final Role employeeRole = new Role();
         employeeRole.setName("EMPLOYEE");
+        employeeRole.setTitle("Employee");
         roleRepository.save(employeeRole);
         final Role clientRole = new Role();
         clientRole.setName("CLIENT");
+        clientRole.setTitle("Client");
         roleRepository.save(clientRole);
 
         final User superUser = new User();

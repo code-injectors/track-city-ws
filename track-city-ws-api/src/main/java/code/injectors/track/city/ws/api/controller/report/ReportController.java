@@ -11,5 +11,5 @@ import org.springframework.http.ResponseEntity;
  */
 public interface ReportController extends PageableController<Report, ReportDTO, ReportLazyDTO> {
 
-    ResponseEntity<Void> changeStatus(final String id, final String status);
+    ResponseEntity<ReportLazyDTO> changeStatus(final String id, final String status);
 }

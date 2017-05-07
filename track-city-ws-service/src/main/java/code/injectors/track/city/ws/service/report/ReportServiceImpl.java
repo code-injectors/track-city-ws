@@ -1,6 +1,7 @@
 package code.injectors.track.city.ws.service.report;
 
 import code.injectors.track.city.ws.domain.entity.report.Report;
+import code.injectors.track.city.ws.domain.entity.report.ReportStatus;
 import code.injectors.track.city.ws.domain.repository.GenericRepository;
 import code.injectors.track.city.ws.domain.repository.report.ReportRepository;
 import javaslang.control.Try;
@@ -30,7 +31,20 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public Try<Report> create(Report entity) {
         entity.setCreatedAt(new Date());
+        entity.setStatus(ReportStatus.PENDING);
 
         return Try.of(() -> reportRepository.save(entity));
+    }
+
+    @Override
+    public Report changeStatus(String id, String status) {
+        final Report report = getRepository().findOne(id);
+
+        if (report != null) {
+            report.setStatus(ReportStatus.valueOf(status));
+            update(report);
+        }
+
+        return report;
     }
 }
