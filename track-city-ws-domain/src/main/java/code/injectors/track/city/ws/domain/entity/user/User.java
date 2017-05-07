@@ -3,10 +3,7 @@ package code.injectors.track.city.ws.domain.entity.user;
 import code.injectors.track.city.ws.domain.entity.BaseEntity;
 import code.injectors.track.city.ws.domain.entity.municipality.Municipality;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -16,12 +13,16 @@ import java.util.Date;
 @Table(name = "users")
 public class User extends BaseEntity {
 
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String firstName;
 
+    @Column(nullable = false)
     private String lastName;
 
     @ManyToOne
