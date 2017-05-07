@@ -20,6 +20,7 @@ public class Report extends BaseEntity {
 
     private String title;
 
+    @Column(length = 65536)
     private String description;
 
     private Double longitude;
