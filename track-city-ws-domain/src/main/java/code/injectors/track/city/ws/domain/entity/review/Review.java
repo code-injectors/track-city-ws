@@ -1,6 +1,7 @@
 package code.injectors.track.city.ws.domain.entity.review;
 
 import code.injectors.track.city.ws.domain.entity.BaseEntity;
+import code.injectors.track.city.ws.domain.entity.report.Report;
 import code.injectors.track.city.ws.domain.entity.user.User;
 
 import javax.persistence.Entity;
@@ -20,6 +21,9 @@ public class Review extends BaseEntity {
 
     @ManyToOne
     private User user;
+
+    @ManyToOne
+    private Report report;
 
     public Boolean getUpvote() {
         return isUpvote;
@@ -51,5 +55,13 @@ public class Review extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Report getReport() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
     }
 }
