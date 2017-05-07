@@ -10,6 +10,7 @@ public class ReviewDTO extends AbstractDTO {
 
     private Boolean isUpvote;
     private String comment;
+    private Boolean hidden;
     private UserDTO user;
 
     public Boolean getUpvote() {
@@ -26,6 +27,14 @@ public class ReviewDTO extends AbstractDTO {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Boolean getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(Boolean hidden) {
+        this.hidden = hidden;
     }
 
     public UserDTO getUser() {

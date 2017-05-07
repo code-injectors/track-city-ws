@@ -16,6 +16,8 @@ public class Review extends BaseEntity {
 
     private String comment;
 
+    private Boolean hidden = false;
+
     @ManyToOne
     private User user;
 
@@ -33,6 +35,14 @@ public class Review extends BaseEntity {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Boolean getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(Boolean hidden) {
+        this.hidden = hidden;
     }
 
     public User getUser() {
