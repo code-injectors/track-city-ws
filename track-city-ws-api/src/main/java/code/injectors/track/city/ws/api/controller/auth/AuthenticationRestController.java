@@ -1,11 +1,10 @@
 package code.injectors.track.city.ws.api.controller.auth;
 
 import code.injectors.track.city.ws.api.config.util.JwtTokenUtil;
-import code.injectors.track.city.ws.domain.entity.user.User;
-import code.injectors.track.city.ws.mapper.user.UserMapper;
-import code.injectors.track.city.ws.security.domain.JwtCurrentUser;
 import code.injectors.track.city.ws.dto.auth.JwtAuthenticationRequestDTO;
 import code.injectors.track.city.ws.dto.auth.JwtAuthenticationResponseDTO;
+import code.injectors.track.city.ws.mapper.user.UserMapper;
+import code.injectors.track.city.ws.security.domain.JwtCurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,26 +61,25 @@ public class AuthenticationRestController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Reload password post-security so we can generate token
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-        final String token = jwtTokenUtil.generateToken(userDetails, device);
+        final JwtCurrentUser user = (JwtCurrentUser) userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final String token = jwtTokenUtil.generateToken(user, device);
         final Date expirationDateFromToken = jwtTokenUtil.getExpirationDateFromToken(token);
 
         // Return the token
-        return ResponseEntity.ok(new JwtAuthenticationResponseDTO(token, expirationDateFromToken, userMapper.toDTO((User) userDetails)));
+        return ResponseEntity.ok(new JwtAuthenticationResponseDTO(token, expirationDateFromToken, user.getId()));
     }
 
     @RequestMapping(value = "${jwt.route.authentication.refresh}", method = RequestMethod.GET)
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         String username = jwtTokenUtil.getUsernameFromToken(token);
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        final JwtCurrentUser user = (JwtCurrentUser) userDetails;
+        final JwtCurrentUser user = (JwtCurrentUser) userDetailsService.loadUserByUsername(username);
 
         if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
             final String refreshedToken = jwtTokenUtil.refreshToken(token);
             final Date expirationDateFromToken = jwtTokenUtil.getExpirationDateFromToken(token);
 
-            return ResponseEntity.ok(new JwtAuthenticationResponseDTO(refreshedToken, expirationDateFromToken, userMapper.toDTO((User) userDetails)));
+            return ResponseEntity.ok(new JwtAuthenticationResponseDTO(refreshedToken, expirationDateFromToken, user.getId()));
         } else {
             return ResponseEntity.badRequest().body(null);
         }

@@ -1,7 +1,5 @@
 package code.injectors.track.city.ws.dto.auth;
 
-import code.injectors.track.city.ws.dto.user.UserDTO;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,12 +14,12 @@ public class JwtAuthenticationResponseDTO implements Serializable {
 
     private final Date expiration;
 
-    private final UserDTO user;
+    private final String userId;
 
-    public JwtAuthenticationResponseDTO(final String token, final Date expiration, final UserDTO user) {
+    public JwtAuthenticationResponseDTO(final String token, final Date expiration, final String userId) {
         this.token = token;
         this.expiration = expiration;
-        this.user = user;
+        this.userId = userId;
     }
 
     public String getToken() {
@@ -36,7 +34,7 @@ public class JwtAuthenticationResponseDTO implements Serializable {
         return expiration;
     }
 
-    public UserDTO getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 }
