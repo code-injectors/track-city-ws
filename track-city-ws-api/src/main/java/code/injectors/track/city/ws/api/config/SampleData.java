@@ -12,10 +12,10 @@ import code.injectors.track.city.ws.domain.entity.user.User;
 import code.injectors.track.city.ws.domain.repository.media.MediaRepository;
 import code.injectors.track.city.ws.domain.repository.municipality.MunicipalityRepository;
 import code.injectors.track.city.ws.domain.repository.report.CategoryRepository;
-import code.injectors.track.city.ws.domain.repository.report.ReportRepository;
 import code.injectors.track.city.ws.domain.repository.review.ReviewRepository;
 import code.injectors.track.city.ws.domain.repository.user.RoleRepository;
-import code.injectors.track.city.ws.domain.repository.user.UserRepository;
+import code.injectors.track.city.ws.service.report.ReportService;
+import code.injectors.track.city.ws.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
@@ -37,20 +37,20 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
     private final CategoryRepository categoryRepository;
     private final MediaRepository mediaRepository;
     private final MunicipalityRepository municipalityRepository;
-    private final ReportRepository reportRepository;
+    private final ReportService reportService;
     private final ReviewRepository reviewRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SampleData(CategoryRepository categoryRepository, MediaRepository mediaRepository, MunicipalityRepository municipalityRepository, ReportRepository reportRepository, ReviewRepository reviewRepository, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public SampleData(CategoryRepository categoryRepository, MediaRepository mediaRepository, MunicipalityRepository municipalityRepository, ReportService reportService, ReviewRepository reviewRepository, UserService userService, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.categoryRepository = categoryRepository;
         this.mediaRepository = mediaRepository;
         this.municipalityRepository = municipalityRepository;
-        this.reportRepository = reportRepository;
+        this.reportService = reportService;
         this.reviewRepository = reviewRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -99,7 +99,8 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         superUser.setLastName("Admin");
         superUser.setRole(superUserRole);
         superUser.setPassword(tralala);
-        final User createdSuperUser = userRepository.save(superUser);
+        final User createdSuperUser = userService.create(superUser)
+                .getOrElseThrow(throwable -> new RuntimeException());
 
         final User municipalityAdmin = new User();
         municipalityAdmin.setEmail("municipality.admin@injectors.com");
@@ -108,7 +109,8 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         municipalityAdmin.setRole(municipalityAdminRole);
         municipalityAdmin.setPassword(tralala);
         municipalityAdmin.setManager(createdSuperUser);
-        final User createdMunicipalityAdmin = userRepository.save(municipalityAdmin);
+        final User createdMunicipalityAdmin = userService.create(municipalityAdmin)
+                .getOrElseThrow(throwable -> new RuntimeException());
 
         final User employee1 = new User();
         employee1.setEmail("employee1@injectors.com");
@@ -117,7 +119,8 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         employee1.setRole(employeeRole);
         employee1.setPassword(tralala);
         employee1.setManager(createdMunicipalityAdmin);
-        final User createdEmployee1 = userRepository.save(employee1);
+        final User createdEmployee1 = userService.create(employee1)
+                .getOrElseThrow(throwable -> new RuntimeException());
 
         final User employee2 = new User();
         employee2.setEmail("employee1@injectors.com");
@@ -126,7 +129,8 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         employee2.setRole(employeeRole);
         employee2.setPassword(tralala);
         employee2.setManager(createdMunicipalityAdmin);
-        final User createdEmployee2 = userRepository.save(employee2);
+        final User createdEmployee2 = userService.create(employee2)
+                .getOrElseThrow(throwable -> new RuntimeException());
 
         final User chbakouras = new User();
         chbakouras.setEmail("chbakouras@injectors.com");
@@ -134,14 +138,14 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         chbakouras.setLastName("Bakouras");
         chbakouras.setRole(clientRole);
         chbakouras.setPassword(tralala);
-        userRepository.save(chbakouras);
+        userService.create(chbakouras);
         final User nchatzak = new User();
         nchatzak.setEmail("nchatzak@injectors.com");
         nchatzak.setFirstName("Nikolaos");
         nchatzak.setLastName("Chatzakis");
         nchatzak.setRole(clientRole);
         nchatzak.setPassword(tralala);
-        userRepository.save(nchatzak);
+        userService.create(nchatzak);
 
         IntStream.rangeClosed(1, 20)
                 .forEach(value -> {
@@ -173,7 +177,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
                     report.setDescription("Έχει αποκλειστεί όλη η περιοχή και δεν περνάνε λεωφορεία.");
                     report.setTitle("Ο Φελλός άφησε το αυτοκίνητο του πάνω στην διάβαση πεζών " + value);
                     report.setReviews(Arrays.asList(createdReview1, createdReview2));
-                    reportRepository.save(report);
+                    reportService.create(report);
                 });
 
         IntStream.rangeClosed(1, 20)
@@ -200,7 +204,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
                     report.setDescription("Whatever description.");
                     report.setTitle("Whatever title " + value);
                     report.setReviews(Collections.singletonList(createdReview));
-                    reportRepository.save(report);
+                    reportService.create(report);
                 });
 
         IntStream.rangeClosed(1, 20)
@@ -227,7 +231,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
                     report.setDescription("Έξω από το σπίτι μου επικρατεί η κατάσταση που φαίνεται στις φωτογραφίες. Παρακαλώ κάντε κάτι, δεν μπορώ να βγω με το αμάξι!");
                     report.setTitle("Λακούβες παντού " + value);
                     report.setReviews(Collections.singletonList(createdReview));
-                    reportRepository.save(report);
+                    reportService.create(report);
                 });
 
     }
