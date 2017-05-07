@@ -2,6 +2,7 @@ package code.injectors.track.city.ws.api.controller.report;
 
 import code.injectors.track.city.ws.commons.constant.EndPoint;
 import code.injectors.track.city.ws.domain.entity.report.Report;
+import code.injectors.track.city.ws.domain.entity.report.ReportStatus;
 import code.injectors.track.city.ws.dto.report.ReportDTO;
 import code.injectors.track.city.ws.dto.report.ReportLazyDTO;
 import code.injectors.track.city.ws.mapper.PageMapper;
@@ -15,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -54,5 +57,18 @@ public class ReportControllerImpl implements ReportController {
     @Override
     public ResponseEntity<Page<ReportDTO>> getAll(@QuerydslPredicate(root = Report.class) Predicate predicate, Pageable pageable) {
         return getAllDefaultImplementation(predicate, pageable);
+    }
+
+    @Override
+    @PostMapping("/{id}/change-status/{status}")
+    public ResponseEntity<Void> changeStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
+        reportService.findOne(id)
+                .forEach(reports -> reports
+                        .forEach(report -> {
+                            report.setStatus(ReportStatus.valueOf(status));
+                            reportService.update(report);
+                        }));
+
+        return ResponseEntity.ok().build();
     }
 }
